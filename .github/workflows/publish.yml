@@ -8,28 +8,38 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-
     permissions:
       contents: write
 
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
 
-      - run: npm install
-
-      - run: |
+      # ✅ Git config first
+      - name: Configure Git
+        run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
-      - run: npm version patch -m "Auto version bump"
+      # ✅ Version bump BEFORE install
+      - name: Bump version
+        run: npm version patch -m "Auto version bump"
 
-      - run: git push origin main --follow-tags
+      # ✅ Push updated version
+      - name: Push changes
+        run: git push origin main --follow-tags
 
-      - run: npm publish
+      # Now install
+      - name: Install dependencies
+        run: npm install
+
+      # Publish
+      - name: Publish to NPM
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
