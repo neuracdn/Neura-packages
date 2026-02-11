@@ -1,0 +1,43 @@
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.playful-button {
+  position: relative;
+  padding: 15px 30px;
+  background: rgba(255, 255, 255, 0.6);
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: #3f2a5c;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+.playful-button:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+.playful-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(255, 200, 200, 0.5), rgba(255, 200, 200, 0) 70%);
+  border-radius: 50%;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+  transform: translateY(-50%) translateX(-50%);
+}
+.playful-button:hover:before {
+  transform: translateY(-60%) translateX(-60%) scale(1.1);
+}
+.playful-button span {
+  position: relative;
+  z-index: 1;
+}
