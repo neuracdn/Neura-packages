@@ -3,29 +3,51 @@
 const fs = require("fs");
 const path = require("path");
 
+// Recursive copy function
+function copyFolderSync(source, target) {
+  if (!fs.existsSync(source)) {
+    console.log("❌ UI folder not found inside package.");
+    process.exit(1);
+  }
+
+  if (!fs.existsSync(target)) {
+    fs.mkdirSync(target, { recursive: true });
+  }
+
+  const files = fs.readdirSync(source);
+
+  files.forEach((file) => {
+    const srcFile = path.join(source, file);
+    const destFile = path.join(target, file);
+
+    if (fs.lstatSync(srcFile).isDirectory()) {
+      copyFolderSync(srcFile, destFile);
+    } else {
+      if (!fs.existsSync(destFile)) {
+        fs.copyFileSync(srcFile, destFile);
+      }
+    }
+  });
+}
+
 const command = process.argv[2];
 
 if (command === "init") {
-  const targetDir = path.join(process.cwd(), "UI");
+  const projectRoot = process.cwd();
+  const srcPath = path.join(projectRoot, "src");
 
-  // Create UI folder
-  if (!fs.existsSync(targetDir)) {
-    fs.mkdirSync(targetDir);
+  if (!fs.existsSync(srcPath)) {
+    console.log("❌ No src folder found. Run inside a Vite/React project.");
+    process.exit(1);
   }
 
-  // Create index.js inside UI
-  const filePath = path.join(targetDir, "index.js");
+  const templatePath = path.join(__dirname, "UI");
+  const targetPath = path.join(srcPath, "UI");
 
-  if (!fs.existsSync(filePath)) {
-    fs.writeFileSync(
-      filePath,
-      `export const hello = () => "Neura UI Working 🚀";`
-    );
-    console.log("✅ UI folder and index.js created!");
-  } else {
-    console.log("⚠ index.js already exists.");
-  }
+  copyFolderSync(templatePath, targetPath);
 
+  console.log("✅ UI folder copied successfully into src/UI");
 } else {
-  console.log("Usage: npx neura init");
+  console.log("Usage:");
+  console.log("  npx neura init");
 }
