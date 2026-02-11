@@ -34,10 +34,10 @@ const command = process.argv[2];
 
 if (command === "init") {
   const projectRoot = process.cwd();
-  const srcPath = path.join(projectRoot, "src");
+  const srcPath = path.join(projectRoot, "src", "app");
 
   if (!fs.existsSync(srcPath)) {
-    console.log("❌ No src folder found. Run inside a Vite/React project.");
+    console.log("❌ No src/app folder found. Run inside a Next.js or React project.");
     process.exit(1);
   }
 
