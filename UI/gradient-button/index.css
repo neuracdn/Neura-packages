@@ -1,0 +1,48 @@
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.cyberpunk-button {
+  position: relative;
+  padding: 15px 30px;
+  font-size: 18px;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(135deg, rgba(0, 255, 204, 0.5), rgba(0, 0, 0, 0.5));
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.5);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cyberpunk-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background: linear-gradient(135deg, cyan, magenta);
+  background-clip: padding-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+.cyberpunk-button:hover {
+  transform: translateY(-3px);
+}
+.cyberpunk-button:hover:before {
+  border-color: rgba(0, 255, 204, 0.5);
+}
+.cyberpunk-button:active {
+  transform: translateY(1px);
+}
+.cyberpunk-button span {
+  position: relative;
+  z-index: 1;
+}
