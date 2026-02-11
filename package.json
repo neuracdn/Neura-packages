@@ -4,8 +4,12 @@
   "description": "",
   "main": "UI/index.js",
   "files": [
-    "UI"
+    "UI",
+    "cli.js"
   ],
+  "bin": {
+    "neura": "./cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
