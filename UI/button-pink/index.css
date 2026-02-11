@@ -1,0 +1,34 @@
+.main-container {
+  position: relative;
+  display: inline-block;
+}
+.playful-button {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #f9a8d4, #fbcfe8);
+  color: #6b7280;
+  font-size: 18px;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.playful-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+.blob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(30deg);
+  filter: blur(30px);
+  z-index: 0;
+}
