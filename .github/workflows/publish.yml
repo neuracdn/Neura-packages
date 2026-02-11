@@ -20,25 +20,30 @@ jobs:
           node-version: 18
           registry-url: https://registry.npmjs.org/
 
-      # ✅ Git config first
       - name: Configure Git
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
-      # ✅ Version bump BEFORE install
+      # ✅ Version bump WITHOUT creating git tag
       - name: Bump version
-        run: npm version patch -m "Auto version bump"
+        run: npm version patch --no-git-tag-version
 
-      # ✅ Push updated version
+      # ✅ Commit version manually
+      - name: Commit version
+        run: |
+          git add package.json
+          git commit -m "Auto version bump"
+
+      # ✅ Push main only (NO TAGS)
       - name: Push changes
-        run: git push origin main --follow-tags
+        run: git push origin main
 
-      # Now install
+      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Publish
+      # Publish to NPM
       - name: Publish to NPM
         run: npm publish
         env:
