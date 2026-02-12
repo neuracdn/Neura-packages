@@ -1,6 +1,6 @@
 {
   "name": "neura-packages",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "",
   "main": "UI/index.js",
   "files": [
