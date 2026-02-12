@@ -1,0 +1,53 @@
+.organic-button {
+  position: relative;
+  display: inline-block;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 24px;
+  background-color: #ffc5c5;
+  color: #333;
+  font-size: 18px;
+  font-family: 'Great Vibes', cursive;
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(255, 197, 197, 0.4);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.organic-button:hover {
+  background-color: #ffd7d7;
+  box-shadow: 0 12px 24px rgba(255, 215, 215, 0.6);
+}
+.organic-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  background-color: #ffe6e6;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: blob 2s infinite;
+}
+@keyframes blob {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+.hand-drawn-icon {
+  position: absolute;
+  top: 50%;
+  left: 24px;
+  transform: translate(0, -50%);
+  width: 24px;
+  height: 24px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z" fill="%23fff"/></svg>');
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+}
