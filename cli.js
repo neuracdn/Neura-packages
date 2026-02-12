@@ -6,7 +6,8 @@ const path = require("path");
 // 🔁 Recursive Copy Function (Safe - No Overwrite)
 function copyFolderSync(source, target) {
   if (!fs.existsSync(source)) {
-    console.log("❌ Source component not found in package.");
+    console.log("Source component not found in package...");
+      console.log("If you have just added this component, please wait a few seconds and try again.");
     process.exit(1);
   }
 
