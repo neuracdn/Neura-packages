@@ -5,46 +5,68 @@ on:
     branches:
       - main
 
+# 🚀 Prevent race conditions
+concurrency:
+  group: publish-main
+  cancel-in-progress: false
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
 
     steps:
-      - uses: actions/checkout@v3
+      # 🧾 Checkout full history (important for versioning)
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
+      # 🟢 Setup Node
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
 
+      # ⚙️ Configure Git
       - name: Configure Git
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
-      # ✅ Version bump WITHOUT creating git tag
-      - name: Bump version
-        run: npm version patch --no-git-tag-version
-
-      # ✅ Commit version manually
-      - name: Commit version
-        run: |
-          git add package.json
-          git commit -m "Auto version bump"
-
-      # ✅ Push main only (NO TAGS)
-      - name: Push changes
-        run: git push origin main
-
-      # Install dependencies
+      # 📦 Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Publish to NPM
+      # 🔼 Pull latest before modifying
+      - name: Pull latest changes
+        run: git pull --rebase origin main
+
+      # 🔢 Bump version (NO tag)
+      - name: Bump version
+        run: npm version patch --no-git-tag-version
+
+      # 💾 Commit version if changed
+      - name: Commit version
+        run: |
+          git add package.json package-lock.json || true
+          git diff --cached --quiet || git commit -m "chore: auto version bump"
+
+      # 🔁 Rebase again (extra safe)
+      - name: Rebase again
+        run: git pull --rebase origin main
+
+      # 🚀 Push updated version
+      - name: Push changes
+        run: git push origin main
+
+      # 📦 Publish to NPM
       - name: Publish to NPM
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
