@@ -1,0 +1,26 @@
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff;
+}
+.modern-button {
+  padding: 16px 32px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #3a3d41 0%, #1f2024 100%);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.modern-button:hover {
+  background: linear-gradient(135deg, #2f3035 0%, #1a1b1f 100%);
+  transform: scale(1.05);
+}
+.modern-button:active {
+  background: linear-gradient(135deg, #2a2b2e 0%, #18191c 100%);
+  transform: scale(0.95);
+}
