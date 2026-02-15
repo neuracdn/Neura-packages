@@ -8,7 +8,7 @@ const Index = ({ className = '', children, title = 'Contact Us', ...props }) => 
       <input type="text" placeholder="Full Name" required />
       <input type="email" placeholder="Email" required />
       <input type="tel" placeholder="Phone Number (optional)" />
-      <textarea rows="4" placeholder="Message" required></textarea>
+      <textarea rows="4" placeholder="Message" required />
       <button type="submit">Submit</button>
       {children}
     </div>
